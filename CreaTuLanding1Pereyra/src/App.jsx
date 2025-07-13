@@ -1,19 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import NavBar from './components/NavBar.jsx'
+import { useState } from 'react';
+import './App.css';
+import HomeComponent from './components/HomeComponents.jsx';
+import NavBar from './components/NavBar.jsx';
 import ItemListContainer from './components/ItemListContainer.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProductDetails from './components/ProductDetail.jsx';
+import ProductsList from "./components/ProductsList";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    <BrowserRouter>
       <NavBar />
-      <ItemListContainer mensaje="¡Bienvenida a la tienda virtual de Fenty Beauty!" />
-    </>
-  )
+      <Routes>
+        <Route path="/" element={<HomeComponent />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/category/:categoryId" element={<ProductsList />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
