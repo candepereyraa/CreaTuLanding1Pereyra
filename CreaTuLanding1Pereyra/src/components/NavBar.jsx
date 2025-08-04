@@ -1,5 +1,6 @@
 import CartWidget from './CartWidget'
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-custom  fixed-top">
@@ -31,7 +32,9 @@ function NavBar() {
 
           {/* Acá el CartWidget alineado a la derecha */}
           <div className="d-flex">
+            <NavLink  to="/cart">
             <CartWidget />
+            </NavLink>
           </div>
         </div>
       </div>

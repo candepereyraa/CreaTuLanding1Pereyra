@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getProds } from "../async"; // aunque no lo usamos para fetch con categoría
+import ButtonCount from "./ButtonCount";
+import { app } from "../firebaseConfig";
+import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore" 
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);
   const { categoryId } = useParams();
 
   useEffect(() => {
+    HandleAgregarProducto()
     if (categoryId) {
       
       fetch(`https://fakestoreapi.com/products/category/${categoryId}`)
@@ -21,7 +25,32 @@ export default function ProductsList() {
     }
   }, [categoryId]);
 
+  const HandleAgregarProducto = () => {
+   const db = getFirestore (app)
+
+   const productosCollection = collection(db,"productos")
+
+  const elPedido = getDocs(productosCollection)
+
+  elPedido
+  .then((respuesta)=>{
+    console.log("salio todo bien")
+    
+    const productosFinales = []
+
+    respuesta.docs.forEach((producto)=>{
+      productosFinales.push(producto.data())
+
+    console.log(productosFinales)
+  })
+  })
+  .catch(()=>{
+    console.log("hay que revisar")
+  })
+  }
+
   return (
+    <>
     <section>
       <h2>Todos nuestros productos</h2>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}></div>
@@ -35,7 +64,7 @@ export default function ProductsList() {
               <article
                 className="articulo"
                 key={product.id}
-                style={{ padding: "10px", width: 200 }}
+                style={{ padding: "10px", width:250 }}
               >
                 <div className="div">
                   <img
@@ -44,18 +73,21 @@ export default function ProductsList() {
                     alt={product.title}
                   />
                 </div>
-                <h4>{product.name}</h4>
+                <h4>{product.title}</h4>
                 <p>
                   Precio: {product.price_sign}
                   {product.price}
                 </p>
                 <Link to={`/product/${product.id}`}>
-                  <button>Ver más detalles</button>
+                  <button style={{color:"green",height:45}}>Ver más detalles</button>
                 </Link>
+                <ButtonCount/>
               </article>
+
             ))}
         </div>
       )}
     </section>
+    </>
   );
 }
