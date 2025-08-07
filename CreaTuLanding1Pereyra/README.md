@@ -10,3 +10,4 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+en este proyecto quise crear una tienda online,con productos traidos de una api ,en el cual podes agregar productos hasta el limite de stock que hay y agregarlo al carrito ,en este se llena un formulario y se realiza la compra ,completando en la base de datos de mi firestore ,los datos de la persona que lleno el formulario

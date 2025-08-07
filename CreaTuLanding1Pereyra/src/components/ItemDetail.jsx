@@ -1,5 +1,5 @@
 import InputCount from "./InputCount";
-import ButtonCount from "./ButtonCount";
+import ButtonCount from "./ItemCount";
 const ItemDetail = ({item,inputType='input'}) =>{
     const Count = inputType === "input" ? InputCount : ButtonCount;
     const max = item.max;

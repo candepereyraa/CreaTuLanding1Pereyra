@@ -1,6 +1,8 @@
+import { useCart } from "./CartContext";
 function CartWidget(){
-    return(
-    <span>🛒0</span>
-    )
+  const {cartCount} = useCart();
+    return (
+    <span>🛒 {cartCount}</span>
+  );
 }
-export default CartWidget
+export default CartWidget;
